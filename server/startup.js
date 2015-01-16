@@ -15,8 +15,8 @@ Meteor.startup(function(){
       id: Meteor.userId(),
       name: "John Doe"
     }
-    
-    Meteor.call('updateUserName', function(){
+
+    Meteor.call('updateUserName', update, function(){
       if (error) {
         console.log(error);
       }
