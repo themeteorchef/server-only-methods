@@ -1,12 +1,26 @@
 Meteor.startup(function(){
 
-  // Note: this requires the Random package to be installed (`meteor add random`).
-  // On startup, we create a global server variable called SERVER_AUTH_TOKEN that
-  // is set to the value of a call to the Random.secret() method. This creates a
-  // 43 character string that we can use to check whether a method can be called
-  // from the client.
-
-  SERVER_AUTH_TOKEN = Random.secret();
-  // See Random docs here for additional options: http://docs.meteor.com/#/full/random
+  /*
+   UPDATED: 01/16/15
+   Thanks to @richsilvo and Ben Green (on Crater.io) for explaining that the
+   auth token is unnecessary. Instead, we can make use of this.connection
+   within our method to determine whether a method was called from the server.
+   Here, we've defined a setTimeout that will fire a call to our updateUserName
+   method 5 seconds after startup, successfully calling our method. If we
+   attempted to call updateUserName from the client (e.g. your browser console)
+   Meteor would throw the error we've defined in our method. Nice!
+  */
+  setTimeout(function(){
+    var update = {
+      id: Meteor.userId(),
+      name: "John Doe"
+    }
+    
+    Meteor.call('updateUserName', function(){
+      if (error) {
+        console.log(error);
+      }
+    });
+  }, 5000);
 
 });
