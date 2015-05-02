@@ -10,6 +10,8 @@
 
 Technically, Meteor's methods are exposed to the client, meaning any user can determine a method we've written and call it from the client. Sometimes, though, we have server methods that we *do not* want accessible from the client. The following pattern showcases how to prevent client-side method calls by ~~making use of the Random package and a bit of elbow grease~~ checking whether `this.connection == null` inside of our method.
 
+**Note:** Server-only Meteor methods are not necessary since normal server side only functions could be used instead. Using server-only Meteor methods can help provide a few advantages when it comes to code organization, readability and understanding. Method declarations (server-only and non-server-only) can be organized and logically grouped together. `Method.call` references visually stand out in code and imply a certain behavior, making it easier to understand what's happening where.  
+
 #### What we're trying to accomplish
 
 As an example, we have a method called `updateUserName` that we only want accessible on the server. We do *not* want a user (or other bad actor) able to update their name from the client. So, by default if our user called `Meteor.call('updateUserName')` on the client...
