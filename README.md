@@ -1,5 +1,9 @@
 #### Preventing Client Calls to a Server-Only Method
 
+### DOES NOT WORK WITH METEOR 1.5.1+
+
+Fair warning, due to change in the behavior of the `this.connection` technique described below, this will _not_ work with Meteor 1.5.1+. If you're using Meteor 1.5.1+, it's best to avoid calling Meteor Methods from the server directly, and instead, [defining common modules that can be called from within your Methods](https://themeteorchef.com/tutorials/using-the-module-pattern).
+
 ---
 
 ### Heads Up!
